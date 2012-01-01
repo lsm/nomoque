@@ -1,13 +1,13 @@
 {
   "name"         : "nomoque",
-  "version"      : "0.1.0",
+  "version"      : "0.1.1",
   "description"  : "A task queue powered by nodejs and mongodb",
   "keywords"     : ["task", "queue", "mongodb"],
   "homepage"     : "https://github.com/zir/nomoque",
   "author"       : "Senmiao Liu <zir.echo@gmail.com>",
   "main"         : "./index",
   "dependencies" : {
-      "mongodb-async": "~0.1.0"
+      "mongodb-async": "~0.1.2"
   },
   "engines"      : {"node" : "~0.4.8"}
 }
