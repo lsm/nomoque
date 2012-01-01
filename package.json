@@ -9,5 +9,5 @@
   "dependencies" : {
       "mongodb-async": "~0.1.2"
   },
-  "engines"      : {"node" : "~0.4.8"}
+  "engines"      : {"node" : ">= 0.4.8"}
 }
