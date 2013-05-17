@@ -2,9 +2,10 @@
  * Module dependencies
  */
 var common = require('./lib/common');
-var connect = require('mongodb-async').connect;
+var MongodbAsync = require('mongodb-async');
+var connect = MongodbAsync.connect;
+var AsyncDb = MongodbAsync.AsyncDb;
 var Queue = require('./lib/queue');
-var Worker = require('./lib/worker');
 
 /**
  * Queue status constants
@@ -23,28 +24,14 @@ exports.STATE_FINISHED = common.STATE_FINISHED;
  * @param options
  * @api public
  */
-exports.createQueue = function(options) {
-  return new Queue(getDbObj(options));
+exports.createQueue = function (options) {
+  var db;
+  if (options instanceof AsyncDb) {
+    db = options;
+  } else {
+    options = common.setDefaultOptions(options);
+    var server = connect(options.host, options.port, {poolSize: options.poolSize});
+    db = server.db(options.db);
+  }
+  return new Queue(db);
 };
-
-/**
- * Connect to mongodb, create and return an instance of `Worker`
- *
- * @param options
- * @api public
- */
-exports.createWorker = function(options) {
-  return new Worker(getDbObj(options));
-};
-
-/**
- * Create a mongodb-async instance according to options
- * @param options
- * @return {Object}
- */
-function getDbObj(options) {
-  options = common.setDefaultOptions(options);
-  var server = connect(options.host, options.port, {poolSize: options.poolSize});
-  var db = server.db(options.db);
-  return db;
-}
