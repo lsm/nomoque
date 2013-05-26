@@ -26,12 +26,12 @@ exports.STATE_FINISHED = common.STATE_FINISHED;
  */
 exports.createQueue = function (options) {
   var db;
-  if (options instanceof AsyncDb) {
+  if (options.db) {
     db = options;
   } else {
     options = common.setDefaultOptions(options);
     var server = connect(options.host, options.port, {poolSize: options.poolSize});
-    db = server.db(options.db);
+    db = server.db(options.name);
   }
   return new Queue(db);
 };
