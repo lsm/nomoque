@@ -1,8 +1,8 @@
 {
   "name"         : "nomoque",
-  "version"      : "0.1.2",
-  "description"  : "A task queue powered by nodejs and mongodb",
-  "keywords"     : ["task", "queue", "mongodb"],
+  "version"      : "0.1.3",
+  "description"  : "Database Centric Distributed Task Queue",
+  "keywords"     : ["task", "queue", "mongodb", "database", "distributed"],
   "homepage"     : "https://github.com/lsm/nomoque",
   "author"       : "Senmiao Liu <senmiao.liu@gmail.com>",
   "main"         : "./index",
