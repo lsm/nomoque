@@ -33,5 +33,5 @@ exports.createQueue = function (options) {
     var server = connect(options.host, options.port, {poolSize: options.poolSize});
     db = server.db(options.name);
   }
-  return new Queue(db);
+  return new Queue(db, options);
 };
