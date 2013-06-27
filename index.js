@@ -30,8 +30,13 @@ exports.createQueue = function (options) {
     db = options;
   } else {
     options = common.setDefaultOptions(options);
-    var server = connect(options.host, options.port, {poolSize: options.poolSize});
-    db = server.db(options.name);
+    var server = connect(options.dbHost, options.dbPort, {poolSize: options.dbPoolSize});
+    db = server.db(options.dbName);
   }
   return new Queue(db, options);
 };
+
+/**
+ * Exports Queue
+ */
+exports.Queue = Queue;
