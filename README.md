@@ -1,4 +1,4 @@
-NoMoQue
+NoMoQue [![build status](https://secure.travis-ci.org/lsm/nomoque.png)](http://travis-ci.org/lsm/nomoque)
 =======
 
 NoMoQue is a database-centric task queue.
