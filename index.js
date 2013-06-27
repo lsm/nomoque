@@ -1,11 +1,11 @@
 /**
  * Module dependencies
  */
-var common = require('./lib/common');
+var nmq = process.env.NMQ_COV ? require('./lib-cov') : require('./lib');
+var common = nmq.common;
+var Queue = nmq.Queue;
 var MongodbAsync = require('mongodb-async');
 var connect = MongodbAsync.connect;
-var AsyncDb = MongodbAsync.AsyncDb;
-var Queue = require('./lib/queue');
 
 /**
  * Queue status constants
