@@ -1,7 +1,7 @@
 var assert = require('assert');
 var nomoque = require('../index');
 var dbSettings = {dbHost: '127.0.0.1', dbPort: 27017, dbPoolSize: 2, dbName: 'nmq_test_db'};
-var common = require('../lib/common');
+var QueueState = nomoque.Queue.QueueState;
 var dateformat = require('dateformat');
 
 
@@ -20,7 +20,7 @@ describe('Queue', function () {
       assert.equal(1, doc.message.a);
       assert.equal(2, doc.message.b);
       assert.equal(dateformat(new Date, 'yyyymmdd'), doc.date);
-      assert.equal(common.STATE_NEW, doc.state);
+      assert.equal(nomoque.STATE_NEW, doc.state);
       queue.once('queued', function (doc) {
         assert.equal('topicB', doc.topic);
         assert.equal(null, doc.message);
@@ -52,8 +52,8 @@ describe('Queue', function () {
       assert.equal(true, topicAFinished);
       assert.equal('topicB', message.topic);
       assert.equal('topicB', error.topic);
-      assert.equal(common.STATE_ERROR, error.state);
-      assert.equal(common.STATE_SHIFTED, message.state);
+      assert.equal(nomoque.STATE_ERROR, error.state);
+      assert.equal(nomoque.STATE_SHIFTED, message.state);
       assert.equal('test error, message received: null', error.error);
     });
     worker.on('fault', function (err) {
