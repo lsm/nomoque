@@ -25,18 +25,39 @@ exports.STATE_FINISHED = common.STATE_FINISHED;
  * @api public
  */
 exports.createQueue = function (options) {
-  var db;
-  if (options.db) {
-    db = options;
-  } else {
-    options = common.setDefaultOptions(options);
-    var server = connect(options.dbHost, options.dbPort, {poolSize: options.dbPoolSize});
-    db = server.db(options.dbName);
-  }
+  options = setDefaultOptions(options);
+  var server = connect(options.dbHost, options.dbPort, {poolSize: options.dbPoolSize});
+  var db = server.db(options.dbName);
+  ensureIndexes(db);
   return new Queue(db, options);
 };
 
 /**
- * Exports Queue
+ * Private helper functions
  */
-exports.Queue = Queue;
+
+function setDefaultOptions(options) {
+  options = options || {};
+  options.dbHost = options.dbHost || '127.0.0.1';
+  options.dbPort = options.dbPort || 27017;
+  options.dbPoolSize = options.dbPoolSize || 2;
+  options.dbName = options.dbName || 'nomoque_default_queue';
+  return options;
+}
+
+function ensureIndexes(db) {
+  db.collection('queues').ensureIndex([
+    ['date', 1],
+    ['topic', 1],
+    ['state', 1]
+  ]);
+  // index for `results`
+  db.collection('results').ensureIndex([
+    ['date', 1],
+    ['topic', 1],
+    ['state', 1],
+    ['created', -1],
+    ['shifted', -1],
+    ['finished', -1]
+  ]);
+}
