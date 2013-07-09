@@ -2,21 +2,27 @@
  * Module dependencies
  */
 var nmq = process.env.NMQ_COV ? require('./lib-cov') : require('./lib');
-var common = nmq.common;
 var Queue = nmq.Queue;
 var MongodbAsync = require('mongodb-async');
 var connect = MongodbAsync.connect;
+
+
+/**
+ * Exports Queue
+ */
+
+exports.Queue = Queue;
 
 /**
  * Queue status constants
  */
 
-exports.STATE_ERROR = common.STATE_ERROR;
-exports.STATE_NEW = common.STATE_NEW;
-exports.STATE_SHIFTED = common.STATE_SHIFTED;
-exports.STATE_INPROGRESS = common.STATE_INPROGRESS;
-exports.STATE_PARTIAL = common.STATE_PARTIAL;
-exports.STATE_FINISHED = common.STATE_FINISHED;
+exports.STATE_ERROR = Queue.QueueState.STATE_ERROR;
+exports.STATE_NEW = Queue.QueueState.STATE_NEW;
+exports.STATE_SHIFTED = Queue.QueueState.STATE_SHIFTED;
+exports.STATE_INPROGRESS = Queue.QueueState.STATE_INPROGRESS;
+exports.STATE_PARTIAL = Queue.QueueState.STATE_PARTIAL;
+exports.STATE_FINISHED = Queue.QueueState.STATE_FINISHED;
 
 /**
  * Connect to mongodb, create and return an instance of `Queue`
