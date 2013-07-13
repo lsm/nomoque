@@ -34,7 +34,6 @@ exports.createQueue = function (options) {
   options = setDefaultOptions(options);
   var server = connect(options.dbHost, options.dbPort, {poolSize: options.dbPoolSize});
   var db = server.db(options.dbName);
-  ensureIndexes(db);
   return new Queue(db, options);
 };
 
@@ -49,21 +48,4 @@ function setDefaultOptions(options) {
   options.dbPoolSize = options.dbPoolSize || 2;
   options.dbName = options.dbName || 'nomoque_default_queue';
   return options;
-}
-
-function ensureIndexes(db) {
-  db.collection('queues').ensureIndex([
-    ['date', 1],
-    ['topic', 1],
-    ['state', 1]
-  ]);
-  // index for `results`
-  db.collection('results').ensureIndex([
-    ['date', 1],
-    ['topic', 1],
-    ['state', 1],
-    ['created', -1],
-    ['shifted', -1],
-    ['finished', -1]
-  ]);
 }
