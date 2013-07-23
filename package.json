@@ -1,6 +1,6 @@
 {
   "name": "nomoque",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Database Centric Distributed Task Queue",
   "keywords": ["task", "queue", "database", "distributed", "persistent", "mongodb"],
   "homepage": "https://github.com/lsm/nomoque",
