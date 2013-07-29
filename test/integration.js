@@ -6,6 +6,7 @@ var dateformat = require('dateformat');
 
 
 describe('Queue', function () {
+  this.timeout(10000);
 
   it('should create an instance of Queue', function () {
     var queue = nomoque.createQueue(dbSettings);
@@ -64,11 +65,14 @@ describe('Queue', function () {
       callback('test error, message received: ' + JSON.stringify(message));
     });
     worker.process('topicA', 'add', function (message, callback) {
+      worker.resume('topicB');
       assert.equal(1, message.a);
       assert.equal(2, message.b);
       topicAFinished = true;
       callback(null, message.a + message.b);
     });
+
+    worker.pause('topicB');
     worker.start();
   });
 
