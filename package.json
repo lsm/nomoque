@@ -1,8 +1,8 @@
 {
   "name": "nomoque",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Database Centric Distributed Task Queue",
-  "keywords": ["task", "queue", "database", "distributed", "persistent", "mongodb"],
+  "keywords": ["task", "queue", "persistent", "priority", "database", "distributed", "mongodb"],
   "homepage": "https://github.com/lsm/nomoque",
   "author": "Senmiao Liu <senmiao.liu@gmail.com>",
   "main": "./index",
