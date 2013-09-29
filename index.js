@@ -20,9 +20,9 @@ exports.Queue = Queue;
 exports.STATE_ERROR = Queue.QueueState.STATE_ERROR;
 exports.STATE_NEW = Queue.QueueState.STATE_NEW;
 exports.STATE_SHIFTED = Queue.QueueState.STATE_SHIFTED;
-exports.STATE_INPROGRESS = Queue.QueueState.STATE_INPROGRESS;
 exports.STATE_PARTIAL = Queue.QueueState.STATE_PARTIAL;
 exports.STATE_FINISHED = Queue.QueueState.STATE_FINISHED;
+exports.STATE_TIMEOUT = Queue.QueueState.STATE_TIMEOUT;
 
 /**
  * Connect to mongodb, create and return an instance of `Queue`
